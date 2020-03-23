@@ -115,6 +115,10 @@ public class ImageDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
             //根据父路径分类存放图片
             File imageFile = new File(imagePath);
             File imageParentFile = imageFile.getParentFile();
+            if(imageParentFile == null){
+                continue;
+            }
+
             ImageFolder imageFolder = new ImageFolder();
             imageFolder.name = imageParentFile.getName();
             imageFolder.path = imageParentFile.getAbsolutePath();
