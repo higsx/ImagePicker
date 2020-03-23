@@ -59,6 +59,13 @@ public class ImageCropActivity extends ImageBaseActivity implements View.OnClick
         mOutputY = imagePicker.getOutPutY();
         mIsSaveRectangle = imagePicker.isSaveRectangle();
         mImageItems = imagePicker.getSelectedImages();
+
+        if(mImageItems.size() == 0){
+            setResult(RESULT_CANCELED);
+            finish();
+            return;
+        }
+
         String imagePath = mImageItems.get(0).path;
 
         mCropImageView.setFocusStyle(imagePicker.getStyle());
@@ -73,6 +80,12 @@ public class ImageCropActivity extends ImageBaseActivity implements View.OnClick
         options.inSampleSize = calculateInSampleSize(options, displayMetrics.widthPixels, displayMetrics.heightPixels);
         options.inJustDecodeBounds = false;
         mBitmap = BitmapFactory.decodeFile(imagePath, options);
+        if(mBitmap == null){
+            setResult(RESULT_CANCELED);
+
+            finish();
+            return;
+        }
 //        mCropImageView.setImageBitmap(mBitmap);
         //设置默认旋转角度
         mCropImageView.setImageBitmap(mCropImageView.rotate(mBitmap, BitmapUtil.getBitmapDegree(imagePath)));
