@@ -517,7 +517,7 @@ public class CropImageView extends AppCompatImageView {
                     bitmap = circleBitmap;
                 }
             }
-        } catch (OutOfMemoryError e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return bitmap;
@@ -533,6 +533,11 @@ public class CropImageView extends AppCompatImageView {
         if (mSaving) return;
         mSaving = true;
         final Bitmap croppedImage = getCropBitmap(expectWidth, exceptHeight, isSaveRectangle);
+        if(croppedImage == null){
+            mSaving = false;
+            return;
+        }
+
         Bitmap.CompressFormat outputFormat = Bitmap.CompressFormat.JPEG;
         File saveFile = createFile(folder, "IMG_", ".jpg");
         if (mStyle == CropImageView.Style.CIRCLE && !isSaveRectangle) {
