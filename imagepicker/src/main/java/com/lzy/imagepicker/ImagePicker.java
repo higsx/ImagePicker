@@ -217,6 +217,12 @@ public class ImagePicker {
         mCurrentImageFolderPosition = mCurrentSelectedImageSetPosition;
     }
 
+    //检测当前目录是否有效
+    public Boolean checkCurrentImageFolderValid() {
+        return mImageFolders && (mImageFolders.size() > mCurrentImageFolderPosition);
+    }
+
+
     public ArrayList<ImageItem> getCurrentImageFolderItems() {
         return mImageFolders.get(mCurrentImageFolderPosition).images;
     }

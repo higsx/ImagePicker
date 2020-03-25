@@ -287,6 +287,17 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
             startActivityForResult(intent, ImagePicker.REQUEST_CODE_PREVIEW);  //?????????????????????????
         } else {
             imagePicker.clearSelectedImages();
+
+            if(imagePicker.checkCurrentImageFolderValid() == false){
+                return;
+            }
+
+            ArrayList<ImageItem> folderItems = imagePicker.getCurrentImageFolderItems();
+            //java.lang.IndexOutOfBoundsException
+            if(folderItems.size() <= position){
+                return;
+            }
+
             imagePicker.addSelectedImageItem(position, imagePicker.getCurrentImageFolderItems().get(position), true);
             if (imagePicker.isFreeCrop) {
                 Intent intent = new Intent(ImageGridActivity.this, FreeCropActivity.class);
