@@ -219,7 +219,7 @@ public class ImagePicker {
 
     //检测当前目录是否有效
     public Boolean checkCurrentImageFolderValid() {
-        return mImageFolders && (mImageFolders.size() > mCurrentImageFolderPosition);
+        return (mImageFolders != null) && (mImageFolders.size() > mCurrentImageFolderPosition);
     }
 
 
